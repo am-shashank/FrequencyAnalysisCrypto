@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.upenn.cis573.hwk1;
+package edu.upenn.cis573.hwk1.io;
 
 import java.io.File;
 import java.util.ArrayList;

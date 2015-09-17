@@ -72,8 +72,8 @@ public class SubstitutionCipherCrypto implements ICrypto {
 		return new String(cipherTextArray);
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.upenn.cis573.hwk1.Crypto#decrypt(java.lang.String)
+	/**
+	 * Decrypt the cipher text using Character Frequency Analysis
 	 */
 	public String decrypt(String cipherText) {
 		// apply frequency analysis to ciphertext
