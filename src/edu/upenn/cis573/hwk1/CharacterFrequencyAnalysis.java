@@ -3,14 +3,14 @@
  */
 package edu.upenn.cis573.hwk1;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
+ * Builds a character counter from the input string
  * @author Shashank
  * 
  */
@@ -24,8 +24,7 @@ public class CharacterFrequencyAnalysis {
 		updateCounter();
 	}
 	/**
-	 * Update the character frequency by adding 
-	 * character counts from the characters in each file
+	 * Update the character frequency ignoring the case
 	 * @param filename
 	 * @throws IOException 
 	 * @throws FileNotFoundException
@@ -44,7 +43,7 @@ public class CharacterFrequencyAnalysis {
 	}
 	
 	/**
-	 * 
+	 * Sort the hashmap by value and return the most frequent characters in sorted order
 	 */
 	public Character[] generateFrequencyModel() {
 		

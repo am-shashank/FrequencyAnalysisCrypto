@@ -6,19 +6,25 @@ package edu.upenn.cis573.hwk1;
 import java.util.HashMap;
 
 /**
+ * Encrypt using Substitution cipher and 
+ * decrypt using Frequency Analysis
  * @author Shashank
- *
  */
-public class SubstitutionCipherCrypto implements Crypto {
+public class SubstitutionCipherCrypto implements ICrypto {
 
 	HashMap<Character, Character> subCipher;
 	String trainingData;
-	String validationData;
+	String testData;
 	Character [] trainingFreq;
 	
-	public SubstitutionCipherCrypto(String trainingData, String validationData) {
+	/**
+	 * 
+	 * @param trainingData
+	 * @param testData
+	 */
+	public SubstitutionCipherCrypto(String trainingData, String testData) {
 		this.trainingData = trainingData;
-		this.validationData = validationData;
+		this.testData = testData;
 		CharacterFrequencyAnalysis faTrain = new CharacterFrequencyAnalysis(trainingData);
 		trainingFreq = faTrain.generateFrequencyModel();
 		subCipher = new HashMap<Character, Character>();
@@ -26,13 +32,13 @@ public class SubstitutionCipherCrypto implements Crypto {
 
 	CrossValidationInfo crossValidate(String fileName) {
 		int numCorrect = 0, numInCorrect = 0;		
-		String cipherText = encrypt(validationData);
+		String cipherText = encrypt(testData);
 		//System.out.println("[DEBUG] Plain text: "+plainText);
 		//System.out.println("[DEBUG] Cipher text: "+cipherText);
 		String decipheredText = decrypt(cipherText);
 		//System.out.println("[DEBUG] Deciphered text: "+decipheredText);
 		for(int i=0;i < decipheredText.length(); i++) {
-			char ch = validationData.charAt(i);
+			char ch = testData.charAt(i);
 			if(Character.isAlphabetic(ch)) {
 				ch = Character.toLowerCase(ch);
 				if(ch == decipheredText.charAt(i))
@@ -46,15 +52,15 @@ public class SubstitutionCipherCrypto implements Crypto {
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see edu.upenn.cis573.hwk1.Crypto#encrypt(java.lang.String)
+	/**
+	 * Encrypt the string using substitution cipher
 	 */
 	public String encrypt(String plainText) {
 		HashMap<Character, Character> plainCipherMap = new HashMap<Character, Character>();
 		char[] cipherTextArray = new char[plainText.length()];
-		// int randInt = new Random().nextInt(100);
 		for(int i=0;i<plainText.length(); i++) {
 			char p = plainText.charAt(i);
+			// Encrypt only ASCII alphabets
 			if(Character.isAlphabetic(p)) {
 				p = Character.toLowerCase(p);
 				cipherTextArray[i] = (char) (((p + 10) % 26 ) + 'a');
